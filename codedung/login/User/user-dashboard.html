@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KHÓA ĐIỆN TỬ</title>
+        <link rel="stylesheet" href="dashboard-styles.css">
+        <link rel="icon" href="logoweb.png" type="png">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>    
+<body>
+    <header>
+        <h1>Cổng dữ liệu khóa điện tử</h1>
+        <nav>
+            <ul>
+                <li><a href="#personal-info">Thông tin cán nhân</a></li>
+                <li><a href="#fingerprint-info">Kiểu khóa</a></li>
+                <li><a href="#unlock-history">Lịch sử</a></li>
+                <li><a href="index.html">Đăng xuất</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="info-and-chart" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+            <!-- Thông tin cá nhân -->
+            <div id="personal-info">
+                <h2>Thông tin cá nhân</h2>
+                <div class="image-preview">
+                    <img src="1.jpg" alt="User Image" style="width: 150px; height: 150px; border-radius: 50%;">
+                </div>
+                <button>Update Image</button>
+                <p>Họ tên: Trần Đình Dũng</p>
+                <p>Địa chỉ:Yên Dũng-Bắc Giang</p>
+                <p>Email: trandinhdung03@gmail.com</p>
+                <p>Sđt: 0369510355</p>
+            </div>
+            <!-- Biểu đồ -->
+            <div id="unlock-chart">
+                <h2>Biểu đồ</h2>
+                <canvas id="unlockChart" width="400" height="200"></canvas>
+                <script>
+                    // Dữ liệu mẫu cho số lần mở khóa mỗi ngày
+                    const unlockData = {
+                        labels: ["2024-12-01", "2024-12-02", "2024-12-03"], // Các ngày
+                        datasets: [{
+                            label: "Unlock Attempts",
+                            data: [3, 5, 2], // Số lần mở khóa tương ứng từng ngày
+                            backgroundColor: "rgba(75, 192, 192, 0.2)",
+                            borderColor: "rgba(75, 192, 192, 1)",
+                            borderWidth: 1
+                        }]
+                    };
+                    const config = {
+                        type: 'bar', // Kiểu biểu đồ: cột
+                        data: unlockData,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true // Bắt đầu trục y từ 0
+                                }
+                            }
+                        }
+                    };
+        
+                    // Khởi tạo biểu đồ
+                    const unlockChart = new Chart(
+                        document.getElementById('unlockChart'),
+                        config
+                    );
+                </script>
+            </div>
+        </section>
+          
+        <section id="fingerprint-info">
+            <h2>Kiểu mở khóa</h2>
+            <p>Vân tay 1: Đã kích hoạt</p>
+            <button>Thêm vân tay</button>
+        </section>
+
+        <section id="unlock-history">
+            <h2>Lịch sử</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-12-01</td>
+                        <td>08:45 AM</td>
+                        <td>Fingerprint</td>
+                        <td>Success</td>
+                    </tr>
+                    <tr>
+                        <td>2024-12-02</td>
+                        <td>09:15 AM</td>
+                        <td>Image</td>
+                        <td>Success</td>
+                    </tr>
+                    <tr>
+                        <td>2024-12-03</td>
+                        <td>07:30 PM</td>
+                        <td>Fingerprint</td>
+                        <td>Failed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Bản quyền thuộc TEAM 6 người 2025</p>
+    </footer>
+</body>
+</html>
