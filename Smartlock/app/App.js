@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
+import AdminHomeScreen from './screens/AdminHomeScreen'; // Import màn hình quản trị
 
 // Import Firebase SDK
 import { initializeApp } from 'firebase/app';
@@ -28,14 +29,10 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);  // Đặt trạng thái người dùng nếu đã đăng nhập
-      } else {
-        setUser(null);  // Đặt trạng thái người dùng là null nếu chưa đăng nhập
-      }
+      setUser(user);
     });
 
-    return () => unsubscribe();  // Dọn dẹp listener khi component bị hủy
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -44,6 +41,7 @@ export default function App() {
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Đăng ký' }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Đăng nhập' }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'SmartLock' }} />
+        <Stack.Screen name="AdminHomeScreen" component={AdminHomeScreen} options={{ title: 'Trang Quản Trị' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
